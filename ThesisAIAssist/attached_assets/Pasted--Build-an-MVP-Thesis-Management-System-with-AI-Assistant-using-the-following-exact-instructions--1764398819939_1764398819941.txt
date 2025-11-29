@@ -1,0 +1,205 @@
+
+Build an MVP “Thesis Management System with AI Assistant” using the following exact instructions. Follow them step-by-step and generate all necessary files.
+
+
+---
+
+1) Tech Stack (Fixed – Do NOT change)
+
+Backend: FastAPI (Python)
+
+Frontend: React (Vite)
+
+Database: SQLite for MVP
+
+AI: OpenAI Chat Completions API
+
+Auth: JWT + role-based access (Student, Supervisor, Admin)
+
+
+
+---
+
+2) Features (MVP Only)
+
+Student:
+
+Upload files (with versioning)
+
+Track thesis phases
+
+Chat with AI assistant
+
+Dashboard: phases, deadlines, supervisor feedback
+
+
+Supervisor:
+
+View student dashboard
+
+Approve/reject phases
+
+Comment on files
+
+See file history
+
+
+Admin:
+
+Manage users & projects (simple CRUD)
+
+
+AI Assistant:
+
+/chat → takes user message, returns AI answer
+
+Provides: research help, step-by-step guidance, reminders
+
+
+
+---
+
+3) Backend Tasks (FastAPI)
+
+Create the following structure:
+
+backend/
+  main.py
+  db.py
+  auth.py
+  models.py
+  routes/
+    projects.py
+    phases.py
+    files.py
+    comments.py
+    reminders.py
+    chat.py
+  utils/
+    jwt.py
+    hashing.py
+
+Database Models
+
+User(id, name, email, password_hash, role)
+
+Project(id, title, student_id, supervisor_id, status)
+
+Phase(id, project_id, name, status, due_date)
+
+File(id, project_id, phase_id, filename, created_at)
+
+FileVersion(id, file_id, version_number, hash, uploaded_at)
+
+Comment(id, project_id, phase_id, author_id, content)
+
+Reminder(id, user_id, project_id, message, due_date, status)
+
+
+Required API Endpoints
+
+POST /auth/register
+
+POST /auth/login
+
+GET /projects
+
+POST /projects
+
+GET /projects/{projectId}/phases
+
+POST /projects/{projectId}/phases
+
+GET /projects/{projectId}/files
+
+POST /projects/{projectId}/files (upload)
+
+POST /projects/{projectId}/phases/{phaseId}/update-status
+
+POST /projects/{projectId}/comments
+
+POST /projects/{projectId}/reminders
+
+POST /chat
+
+
+/chat Endpoint Details
+
+Input: { "message": "string", "userId": number }
+
+Output: { "reply": "string" }
+
+Use gpt-4o-mini (or best available)
+
+
+
+---
+
+4) Frontend Tasks (React)
+
+Create frontend/ with:
+
+src/
+  pages/
+    Login.jsx
+    DashboardStudent.jsx
+    DashboardSupervisor.jsx
+  components/
+    FileUpload.jsx
+    PhaseList.jsx
+    ChatBox.jsx
+    FileHistory.jsx
+  api/
+    client.js
+
+Frontend must include:
+
+Login page
+
+Student dashboard: phases, reminders, files, AI chatbox
+
+Supervisor dashboard: student progress + approvals
+
+
+
+---
+
+5) Project Root Structure
+
+/backend
+/frontend
+.env.example
+README.md
+.gitignore
+
+
+---
+
+6) Environment Variables (.env)
+
+OPENAI_API_KEY=
+JWT_SECRET=
+
+
+---
+
+7) What You (Replit) Must Produce
+
+✔ Full folder structure
+✔ All backend files with real code
+✔ Database initialization
+✔ JWT login + register working
+✔ /chat connected to OpenAI
+✔ Minimal but working React frontend
+✔ Instructions in README.md on how to run both backend and frontend
+
+
+---
+
+8) Final Requirement
+
+Generate all files automatically
+
+Do not skip or summarize
+
+Code must be executable immediately on Replit
